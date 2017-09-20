@@ -1,0 +1,34 @@
+﻿<div xmlns="http://www.w3.org/1999/xhtml" xmlns:oiz="http://openiz.org/applet">
+    <oiz:script>~/controllers/dashboard.js</oiz:script>
+    <oiz:state name="org-openiz-emr.index">
+        <oiz:url></oiz:url>
+        <oiz:view>
+            <oiz:demand>1.3.6.1.4.1.33349.3.1.5.9.2.1</oiz:demand>
+            <oiz:controller>DashboardController</oiz:controller>
+        </oiz:view>
+    </oiz:state>
+    <div class="container-fluid">
+        <div class="row header-dock index-dock">
+            <div class="col-xs-5">
+                <h4 class="ng-cloak">{{ 'locale.home.greeting' | i18n }} {{ $root.session.username }}!</h4>
+            </div>
+            <div class="col-xs-7 text-right">
+                <h4 class="ng-cloak">{{ 'locale.home.today' | i18n }} {{ ::$root.page.loadTime | date:'EEEE MMM dd, yyyy' }}</h4>
+            </div>
+        </div>
+        <div class="row container-body">
+            <div class="col-xs-12 col-sm-6 no-padding-all">
+                <!-- #include virtual="/org.openiz.emr/views/patients/partials/quicksearch.html" -->
+            </div>
+            <div class="xs-hidden col-sm-6 no-padding-all">
+                <!-- #include virtual="/org.openiz.emr/views/clinic/partials/plan.html" -->
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- #include virtual="/tz.timr.applet/views/clinic/partials/today.html" -->
+            </div>
+        </div>
+    </div>
+</div>

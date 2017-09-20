@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<AppletManifest xmlns="http://openiz.org/applet">
+    <info id="org.openiz.emr" version="0.1.0.0">
+      <icon>/org.openiz.emr/img/icon.png</icon>
+      <name lang="en">Sample EMR</name>
+      <groupName lang="en">EMR</groupName>
+      <author>OpenIZ Community</author>
+      <dependency id="org.openiz.core" version="0.9.0.0"/>
+      <dependency id="org.openiz.templates" version="0.9.0.0"/>
+  </info>
+  <menuItem>
+    <icon>/org.openiz.core/img/appbar.team.png</icon>
+    <text lang="en">Patients</text>
+    <menuItem launch="#/oiz-emr/patient/search" asset="/org.openiz.emr/views/patients/search.html">
+      <icon>/org.openiz.core/img/appbar.people.magnify.png</icon>
+      <text lang="en">Search Patients</text>
+    </menuItem>
+    <menuItem launch="#/oiz-emr/patient/register" asset="/org.openiz.emr/views/patients/register.html">
+      <icon>/org.openiz.core/img/appbar.people.status.png</icon>
+      <text lang="en">Register Patient</text>
+    </menuItem>
+  </menuItem>
+  <menuItem>
+    <icon>/org.openiz.emr/img/appbar.hospital.png</icon>
+    <text lang="en">My Clinic</text>
+    <menuItem launch="#/oiz-emr/act/waiting" asset="/org.openiz.emr/views/encounters/waiting.html">
+      <icon>/org.openiz.core/img/appbar.calendar.future.png</icon>
+      <text lang="en">Waiting Room</text>
+    </menuItem>
+    <menuItem launch="#/oiz-emr/clinic/plan" asset="/org.openiz.emr/views/clinic/plan.html">
+      <icon>/org.openiz.emr/img/appbar.magnify.browse.png</icon>
+      <text lang="en">Facility Plan</text>
+      <text lang="sw">Mpango Kituo</text>
+    </menuItem>
+    <menuItem launch="#/core/reports" asset="/org.openiz.core/views/common/reports/reportlist.html">
+      <icon>/org.openiz.core/img/appbar.graph.line.png</icon>
+      <text lang="en">Reports</text>
+    </menuItem>
+    <menuItem launch="#/oiz-emr/stock/dashboard" asset="/org.openiz.emr/views/stock/dashboard.html">
+      <icon>/org.openiz.core/img/appbar.forklift.load.png</icon>
+      <text lang="en">Stock Overview</text>
+    </menuItem>
+    <menuItem launch="#/oiz-emr/stock/order" asset="/org.openiz.emr/views/stock/order.html">
+      <icon>/org.openiz.core/img/appbar.box.layered.png</icon>
+      <text lang="en">Order Summary</text>
+    </menuItem>
+  </menuItem>
+  <!-- Use the strings element to define the localized portions of your application -->
+  <strings lang="en">
+    
+  </strings>
+</AppletManifest>
+  

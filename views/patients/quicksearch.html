@@ -1,0 +1,111 @@
+﻿<form novalidate="novalidate" ng-controller="PatientSearchController" xmlns="http://www.w3.org/1999/xhtml" xmlns:oiz="http://openiz.org/applet">
+    <oiz:script>~/controllers/patients/search.js</oiz:script>
+    <div class="panel panel-default no-margin-all" ng-init="collapseStatus.searchOpen = true">
+        <div class="panel-heading" ng-click="collapseStatus.searchOpen = !collapseStatus.searchOpen">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-target="#searchCollapse">{{ 'locale.patient.search.quickSearchTitle' | i18n }}</a>
+                <i class="panel-chevron glyphicon" ng-class="{'glyphicon-chevron-down': collapseStatus.searchOpen, 'glyphicon-chevron-right': !collapseStatus.searchOpen}"></i>
+            </h4>
+        </div>
+        <div id="searchCollapse" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-2" style="padding:10px">
+                            <label class="control-label">{{ 'locale.patient.search.query' | i18n }}</label>
+                        </div>
+                        <div class="col-xs-12 col-sm-10 no-padding-all">
+                            <div class="input-group tokenfield-placeholder" ng-form="searchForm">
+                                <input id="search-input" ng-change="addSearchToken()" type="search" oiz-tag="oiz-tag" class="form-control" name="searchInput" ng-required="true" ng-model="search.query.any" autofocus="autofocus" autocomplete="on" placeholder="{{ 'locale.patient.search.placeholder' | i18n }}" />
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="button" ng-click="scanBarcode()">
+                                        <span><span class="glyphicon glyphicon-barcode"></span> {{ 'locale.action.scan' | i18n }}</span>
+                                    </button>
+                                    <button id="patientSearchButton" ng-click="search.search()" type="button" class="btn btn-primary">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <p ng-show="searchForm.searchInput.$invalid &amp;&amp; searchForm.searchInput.$touched &amp;&amp; search.searchSubmitted" class="help-block text-danger">{{ 'locale.patient.search.errors.searchTermRequired' | i18n }}</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 no-padding-all padding-top-10">
+                            <!-- #include virtual="/org.openiz.core/views/common/patients/search/search-results.html" -->
+                        </div>
+                    </div>
+                    <div class="row" ng-if="search.results &amp;&amp; search.isSearching == false">
+                        <div class="col-md-12">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="pull-right btn-group">
+                                        <button id="startAdhocEncounterButton" ng-click="startAdHocEncounter()" ng-disabled="!enableAdhocButton()" class="btn btn-lg" ng-class="{'btn-info': enableAdhocButton(), 'btn-basic': !enableAdhocButton()}">
+                                            <span>
+                                                <span class="glyphicon glyphicon-log-in"></span> {{ 'locale.patient.search.startEncounter' | i18n }}
+                                            </span>
+                                        </button>
+                                        <button id="patientOnlineSearchButton" ng-click="search.search(true)" ng-disabled="!$root.page.onlineState" class="btn btn-lg btn-success">
+                                            <span>
+                                                <span class="glyphicon glyphicon-cloud"></span> {{ 'locale.patient.search.outsideCatchment' | i18n }}
+                                            </span>
+                                        </button>
+                                        <button ui-sref="tz-timr-applet.register-patient" class="btn btn-lg btn-primary">
+                                            <span>
+                                                <span class="glyphicon glyphicon-plus"></span> {{ 'locale.patient.search.register' | i18n }}
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="anonymousPatientDialog" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <ng-form name="masterForm" novalidate="novalidate">
+                        <div class="modal-header">
+                            <h4 class="modal-title ng-cloak">{{ 'locale.patient.adhocTitle' | i18n }}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <fieldset class="form-horizontal form-group">
+                                        <!-- #include virtual="/org.openiz.core/views/common/patients/register/demographics-birthdate.html" -->
+                                    </fieldset>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4 class="ng-cloak">{{ 'locale.patient.identifiers' | i18n }}</h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 no-padding-all">
+                                        <!-- #include virtual="/org.openiz.core/views/common/patients/register/identifiers.html" -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-lg btn-danger ng-cloak" data-dismiss="modal" ng-disabled="formSubmitted">
+                                <span>
+                                    <span class="glyphicon glyphicon-remove"></span> {{ 'locale.action.cancel' | i18n }}
+                                </span>
+                            </button>
+                            <button type="button" class="btn btn-lg btn-success ng-cloak" ng-click="createAdHocPatient(masterForm)" id="createAdhocPatientButton">
+                                <span>
+                                    <span class="glyphicon glyphicon-check"></span> {{ 'locale.action.save' | i18n }}
+                                </span>
+                            </button>
+                        </div>
+                    </ng-form>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
